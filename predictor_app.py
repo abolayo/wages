@@ -17,9 +17,9 @@ list_features = ['loc', 'title', 'bedroom', 'bathroom', 'parking_space']
 
 # Creating a model that performs classification on user input
 def app_model(loc, title, bedroom, bathroom, parking_space):
-    features = [[loc, title, bedroom, bathroom, parking_space]]
+    #features = [[loc, title, bedroom, bathroom, parking_space]]
 
-    prediction = model_classifier.predict(features)
+    prediction = model_classifier.predict(loc, title, bedroom, bathroom, parking_space)
     return prediction
 
 
