@@ -15,8 +15,8 @@ with open('model_5.pkl', 'rb') as file:
 list_features = ['loc', 'title', 'bedroom', 'bathroom', 'parking_space']
 
 
-# Creating a model that performs knn classification on user input
-def model(loc, title, bedroom, bathroom, parking_space):
+# Creating a model that performs classification on user input
+def app_model(loc, title, bedroom, bathroom, parking_space):
     features = [[loc, title, bedroom, bathroom, parking_space]]
 
     prediction = model_classifier.predict(features)
@@ -47,29 +47,9 @@ def main():
     #     #### Model used: {}
     # """.format(model))
     # st.write()
-    outcome = model(loc, title, bedroom, bathroom, parking_space)
-    st.write(f'for a house in {loc}, with {bedroom} bedrooms, {bathroom} bathroom and {parking_space} parking space is {outcome}')
-    # Function to display output
-    # def result(outcome):
-    #     if outcome == 1:
-    #         return fancy_result('You have been diagnosed with Diabetes🤒')
-    #         st.write('Check out our recommendations page to book an appointment with a doctor near you')
-    #     else:
-    #         return st.write("""
-    #     ### You have not been diagnosed with diabetes
-    # """)
-    #
-    # # Function for recommendation
-    # def recommend(outcome):
-    #     if outcome == 1:
-    #
-    #         st.write('Check out our recommendations page to book an appointment with a doctor near you')
-    #     else:
-    #         return st.write('Check out our recommendations page for Health and Diet tips')
-    #
-    # st.success(outcome)
-    # result(outcome)
-    # recommend(outcome)
+    outcome = app_model(loc, title, bedroom, bathroom, parking_space)
+    st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
+             f' {bathroom} bathroom and {parking_space} parking space is {outcome}')
 
 
 if __name__ == '__main__':
