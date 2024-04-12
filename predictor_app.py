@@ -37,11 +37,11 @@ def main():
     """)
 
     # accepting the features from the user
-    loc = st.number_input('Location', min_value=0, max_value=15, value=19)
-    title = st.text_input('Title', min_value=1, max_length=100, value=7)
+    loc = st.number_input('Location', min_value=0, max_value=15, value=12)
+    title = st.number_input('Title', min_value=1, max_value=100, value=7)
     bedroom = st.number_input('Bedroom Units', min_value=1, max_value=1000, value=10, step=5)
     bathroom = st.number_input('Bathroom Units', min_value=1, max_value=100, value=10, step=5)
-    parking_space = st.number_input('Units of Parking Space', min_value=1., max_value=10, value=2)
+    parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=10, value=2)
 
     st.write("""
         #### Model used: {} 
