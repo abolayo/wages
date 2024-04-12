@@ -43,12 +43,13 @@ def main():
     bathroom = st.number_input('Bathroom Units', min_value=1, max_value=100, value=10, step=5)
     parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=10, value=2)
 
-    st.write("""
-        #### Model used: {} 
-    """.format(model))
-    st.write()
-
-    # # Function to display output
+    # st.write("""
+    #     #### Model used: {}
+    # """.format(model))
+    # st.write()
+    outcome = model(loc, title, bedroom, bathroom, parking_space)
+    st.write(f'for a house in {loc}, with {bedroom} bedrooms, {bathroom} bathroom and {parking_space} parking space is {outcome}')
+    # Function to display output
     # def result(outcome):
     #     if outcome == 1:
     #         return fancy_result('You have been diagnosed with Diabetes🤒')
@@ -66,23 +67,9 @@ def main():
     #     else:
     #         return st.write('Check out our recommendations page for Health and Diet tips')
     #
-    # if st.button('CHECK'):
-    #     if model == 'KNN':
-    #         outcome = knn_model(Pregnancies, Glucose, BloodPressure, SkinThickness, BMI, DiabetesPedigreeFunction, Age)
-    #         st.success(outcome)
-    #         result(outcome)
-    #         recommend(outcome)
-    #
-    #     elif model == 'Random Forest':
-    #         outcome = rfc_model(Pregnancies, Glucose, BloodPressure, SkinThickness, BMI, DiabetesPedigreeFunction, Age)
-    #         st.success(outcome)
-    #         result(outcome)
-    #         recommend(outcome)
-    #     else:
-    #         outcome = svc_model(Pregnancies, Glucose, BloodPressure, SkinThickness, BMI, DiabetesPedigreeFunction, Age)
-    #         st.success(outcome)
-    #         result(outcome)
-    #         recommend(outcome)
+    # st.success(outcome)
+    # result(outcome)
+    # recommend(outcome)
 
 
 if __name__ == '__main__':
