@@ -49,7 +49,7 @@ def main():
     if st.button('CHECK'):
         outcome = app_model(input_df)
         st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
-                 f' {bathroom} bathroom and {parking_space} parking space is {outcome}')
+                 f' {bathroom} bathroom and {parking_space} parking space is {outcome[0]}')
 
 
 if __name__ == '__main__':
