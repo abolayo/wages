@@ -6,14 +6,17 @@ import os
 # Loading the model
 
 print("Current Working Directory:", os.getcwd())  # Add this line to check the current directory
-with open('model_5.pkl', 'rb') as file:
-    # Load the data from the pickle file
-    try:
-        model_classifier = pk.load(file)
-    except Exception as e:
-        print("Error loading the file:", str(e))
+# with open('model_5.pkl', 'rb') as file:
+#     # Load the data from the pickle file
+#     try:
+#         model_classifier = pk.load(file)
+#     except Exception as e:
+#         print("Error loading the file:", str(e))
 
 list_features = ['loc', 'title', 'bedroom', 'bathroom', 'parking_space']
+with open('model_5.pkl', 'rb') as file:
+    # Load the data from the pickle file
+    model_classifier = pk.load(file)
 
 
 # Creating a model that performs classification on user input
