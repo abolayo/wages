@@ -31,18 +31,19 @@ def main():
     st.write("""
         ## Fill the form below
     """)
-    if st.button('CHECK'):
-        # accepting the features from the user
-        loc = st.number_input('Location', min_value=0, max_value=15, value=12)
-        title = st.number_input('Title', min_value=1, max_value=100, value=7)
-        bedroom = st.number_input('Bedroom Units', min_value=1, max_value=1000, value=10, step=5)
-        bathroom = st.number_input('Bathroom Units', min_value=1, max_value=100, value=10, step=5)
-        parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=10, value=2)
 
-        # st.write("""
-        #     #### Model used: {}
-        # """.format(model))
-        # st.write()
+    # accepting the features from the user
+    loc = st.number_input('Location', min_value=0, max_value=15, value=12)
+    title = st.number_input('Title', min_value=1, max_value=100, value=7)
+    bedroom = st.number_input('Bedroom Units', min_value=1, max_value=1000, value=10, step=5)
+    bathroom = st.number_input('Bathroom Units', min_value=1, max_value=100, value=10, step=5)
+    parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=10, value=2)
+
+    # st.write("""
+    #     #### Model used: {}
+    # """.format(model))
+    # st.write()
+    if st.button('CHECK'):
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
