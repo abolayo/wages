@@ -1,6 +1,6 @@
 import os
 import pickle as pk
-
+import numpy as np
 import pandas as pd
 import streamlit as st
 
@@ -15,7 +15,7 @@ with open('model_5.pkl', 'rb') as file:
 
 # Creating a model that performs classification on user input
 def app_model(input_df):
-    prediction = model_classifier.predict(input_df)
+    prediction = np.exp(model_classifier.predict(input_df))
     return prediction
 
 
