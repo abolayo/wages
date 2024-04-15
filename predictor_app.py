@@ -7,13 +7,6 @@ import streamlit as st
 # Loading the model
 
 print("Current Working Directory:", os.getcwd())  # Add this line to check the current directory
-# with open('model_5.pkl', 'rb') as file:
-#     # Load the data from the pickle file
-#     try:
-#         model_classifier = pk.load(file)
-#     except Exception as e:
-#         print("Error loading the file:", str(e))
-
 list_features = ['loc', 'title', 'bedroom', 'bathroom', 'parking_space']
 with open('model_5.pkl', 'rb') as file:
     # Load the data from the pickle file
@@ -53,9 +46,10 @@ def main():
     input_df = pd.DataFrame(
         {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
          'parking_space': [parking_space]})
-    outcome = app_model(input_df)
-    st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
-             f' {bathroom} bathroom and {parking_space} parking space is {outcome}')
+    if st.button('CHECK'):
+        outcome = app_model(input_df)
+        st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
+                 f' {bathroom} bathroom and {parking_space} parking space is {outcome}')
 
 
 if __name__ == '__main__':
