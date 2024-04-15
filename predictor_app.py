@@ -1,8 +1,8 @@
+import os
+import pickle as pk
+
 import pandas as pd
 import streamlit as st
-import pickle as pk
-import os
-from xgboost import XGBRegressor
 
 # Loading the model
 
