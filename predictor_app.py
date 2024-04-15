@@ -1,3 +1,4 @@
+import pandas as pd
 import streamlit as st
 import pickle as pk
 import os
@@ -16,10 +17,8 @@ list_features = ['loc', 'title', 'bedroom', 'bathroom', 'parking_space']
 
 
 # Creating a model that performs classification on user input
-def app_model(loc, title, bedroom, bathroom, parking_space):
-    #features = [[loc, title, bedroom, bathroom, parking_space]]
-
-    prediction = model_classifier.predict(loc, title, bedroom, bathroom, parking_space)
+def app_model(input_df):
+    prediction = model_classifier.predict(input_df)
     return prediction
 
 
@@ -47,7 +46,10 @@ def main():
     #     #### Model used: {}
     # """.format(model))
     # st.write()
-    outcome = app_model(loc, title, bedroom, bathroom, parking_space)
+    input_df = pd.DataFrame(
+        {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
+         'parking_space': [parking_space]})
+    outcome = app_model(input_df)
     st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
              f' {bathroom} bathroom and {parking_space} parking space is {outcome}')
 
