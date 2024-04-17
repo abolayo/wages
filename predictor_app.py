@@ -22,14 +22,6 @@ def app_model(input_df):
 
 def wrangle(data):
     # Read the file into a dataframe
-
-
-    # Fill in the missing values for both variable types
-    for name in data.select_dtypes("number"):
-        data[name] = data[name].fillna(value=np.mean(data[name]))
-    for name in data.select_dtypes("object"):
-        data[name] = data[name].fillna("None")
-
     # collect categorical features into a list
     cat_columns = data.dtypes[data.dtypes == "object"].index.to_list()
 
@@ -74,11 +66,11 @@ def main():
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
-        #input_df.to_csv('input_df.csv')
+
         dataframe = wrangle(input_df)
         outcome = np.exp(app_model(dataframe))
         st.write(f'For a  beautifully finished house in the city of {loc}, with {bedroom} bedrooms,'
-                 f' {bathroom} bathroom and {parking_space} parking space the estimated cost is N{outcome[0]:.2f}')
+                 f' {bathroom} bathroom and {parking_space} parking space the estimated cost is N{outcome[0]}')
 
 
 if __name__ == '__main__':
