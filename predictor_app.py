@@ -76,9 +76,9 @@ def main():
              'parking_space': [parking_space]})
         #input_df.to_csv('input_df.csv')
         dataframe = wrangle(input_df)
-        outcome = app_model(dataframe)
-        st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
-                 f' {bathroom} bathroom and {parking_space} parking space is {outcome[0]}')
+        outcome = np.exp(app_model(dataframe))
+        st.write(f'For a  beautifully finished house in the city of {loc}, with {bedroom} bedrooms,'
+                 f' {bathroom} bathroom and {parking_space} parking space the estimated cost is N{outcome[0]:.2f}')
 
 
 if __name__ == '__main__':
