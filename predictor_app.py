@@ -3,6 +3,7 @@ import pickle as pk
 import numpy as np
 import pandas as pd
 import streamlit as st
+from sklearn.preprocessing import LabelEncoder
 
 # Loading the model
 
@@ -19,10 +20,25 @@ def app_model(input_df):
     return prediction
 
 
-def fancy_result(text, font_size=24):
-    res = f'<span style="color:#ff0000; font-size: {font_size}px;">{text}</span>'
-    st.markdown(res, unsafe_allow_html=True)
+def wrangle(df_path):
+    # Read the file into a dataframe
+    data = pd.read_csv(df_path, low_memory=False)
 
+    # Fill in the missing values for both variable types
+    for name in data.select_dtypes("number"):
+        data[name] = data[name].fillna(value=np.mean(data[name]))
+    for name in data.select_dtypes("object"):
+        data[name] = data[name].fillna("None")
+
+    # collect categorical features into a list
+    cat_columns = data.dtypes[data.dtypes == "object"].index.to_list()
+
+    # Use label encoder to encode the categorical features
+    for c in cat_columns:
+        label_encoder = LabelEncoder()
+        label_encoder.fit(list(data[c].values))
+        data[c] = label_encoder.transform(list(data[c].values))
+    return data
 
 # Heading
 def main():
@@ -33,11 +49,19 @@ def main():
     """)
 
     # accepting the features from the user
-    loc = st.number_input('Location', min_value=0, max_value=15, value=12)
-    title = st.number_input('Title', min_value=1, max_value=100, value=7)
-    bedroom = st.number_input('Bedroom Units', min_value=1, max_value=1000, value=10, step=5)
-    bathroom = st.number_input('Bathroom Units', min_value=1, max_value=100, value=10, step=5)
-    parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=10, value=2)
+    loc = (
+        "Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", "Cross River",
+        "Delta", "Ebonyi", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigawa", "Kaduna", "Kano", "Katsina", "Kebbi",
+        "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun",
+        "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara",
+        "Territory Federal Capital Territory",
+    )
+    title = ('Semi-detached duplex', 'Apartment', 'Detached duplex', 'Terrace duplex',
+             'Mansion', 'Bungalow', 'Penthouse', 'Townhouse', 'Flat', 'Cottage',
+    )
+    bedroom = st.number_input('Bedroom Units', min_value=1, max_value=10, value=1, step=1)
+    bathroom = st.number_input('Bathroom Units', min_value=1, max_value=7, value=1)
+    parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=6, value=1)
 
     # st.write("""
     #     #### Model used: {}
@@ -47,11 +71,29 @@ def main():
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
-
-        outcome = app_model(input_df)
+        dataframe = wrangle(input_df)
+        outcome = app_model(dataframe)
         st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
                  f' {bathroom} bathroom and {parking_space} parking space is {outcome[0]}')
 
 
 if __name__ == '__main__':
     main()
+
+
+def show_predict_page():
+    st.title("Software Developer Salary Prediction")
+
+    st.write("""### We need some information to predict the salary""")
+
+    education = (
+        "Less than a Bachelors",
+        "Bachelor’s degree",
+        "Master’s degree",
+        "Post grad",
+    )
+
+    country = st.selectbox("Country", countries)
+    education = st.selectbox("Education Level", education)
+
+    experience = st.slider("Years of Experience", 0, 50, 3)
