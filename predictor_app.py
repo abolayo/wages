@@ -20,9 +20,9 @@ def app_model(input_df):
     return prediction
 
 
-def wrangle(df_path):
+def wrangle(data):
     # Read the file into a dataframe
-    data = pd.read_csv(df_path, low_memory=False)
+
 
     # Fill in the missing values for both variable types
     for name in data.select_dtypes("number"):
@@ -74,8 +74,8 @@ def main():
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
-        input_df.to_csv('input_df.csv', index=False)
-        dataframe = wrangle('input_df.csv')
+        #input_df.to_csv('input_df.csv')
+        dataframe = wrangle(input_df)
         outcome = app_model(dataframe)
         st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
                  f' {bathroom} bathroom and {parking_space} parking space is {outcome[0]}')
