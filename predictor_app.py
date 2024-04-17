@@ -62,7 +62,8 @@ def main():
     bedroom = st.number_input('Bedroom Units', min_value=1, max_value=10, value=1, step=1)
     bathroom = st.number_input('Bathroom Units', min_value=1, max_value=7, value=1)
     parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=6, value=1)
-
+    loc = st.selectbox("State", loc)
+    title = st.selectbox("Type", title)
     # st.write("""
     #     #### Model used: {}
     # """.format(model))
@@ -81,19 +82,3 @@ if __name__ == '__main__':
     main()
 
 
-def show_predict_page():
-    st.title("Software Developer Salary Prediction")
-
-    st.write("""### We need some information to predict the salary""")
-
-    education = (
-        "Less than a Bachelors",
-        "Bachelor’s degree",
-        "Master’s degree",
-        "Post grad",
-    )
-
-    country = st.selectbox("Country", countries)
-    education = st.selectbox("Education Level", education)
-
-    experience = st.slider("Years of Experience", 0, 50, 3)
