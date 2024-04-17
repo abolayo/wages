@@ -40,6 +40,7 @@ def wrangle(df_path):
         data[c] = label_encoder.transform(list(data[c].values))
     return data
 
+
 # Heading
 def main():
     st.title('HOUSE PRICE PREDICTION APP')
@@ -58,12 +59,13 @@ def main():
     )
     title = ('Semi-detached duplex', 'Apartment', 'Detached duplex', 'Terrace duplex',
              'Mansion', 'Bungalow', 'Penthouse', 'Townhouse', 'Flat', 'Cottage',
-    )
+             )
+    loc = st.selectbox("State", loc)
+    title = st.selectbox("Type", title)
     bedroom = st.number_input('Bedroom Units', min_value=1, max_value=10, value=1, step=1)
     bathroom = st.number_input('Bathroom Units', min_value=1, max_value=7, value=1)
     parking_space = st.number_input('Units of Parking Space', min_value=1, max_value=6, value=1)
-    loc = st.selectbox("State", loc)
-    title = st.selectbox("Type", title)
+
     # st.write("""
     #     #### Model used: {}
     # """.format(model))
@@ -72,7 +74,8 @@ def main():
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
-        dataframe = wrangle(input_df)
+        input_df.to_csv('input_df.csv')
+        dataframe = wrangle('input_df.csv')
         outcome = app_model(dataframe)
         st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
                  f' {bathroom} bathroom and {parking_space} parking space is {outcome[0]}')
@@ -80,5 +83,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
