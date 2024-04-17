@@ -74,7 +74,7 @@ def main():
         input_df = pd.DataFrame(
             {'loc': [loc], 'title': [title], 'bedroom': [bedroom], 'bathroom': [bathroom],
              'parking_space': [parking_space]})
-        input_df.to_csv('input_df.csv')
+        input_df.to_csv('input_df.csv', index=False)
         dataframe = wrangle('input_df.csv')
         outcome = app_model(dataframe)
         st.write(f'for a house in {loc}, with {bedroom} bedrooms,'
