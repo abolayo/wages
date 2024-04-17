@@ -70,7 +70,7 @@ def main():
         dataframe = wrangle(input_df)
         outcome = app_model(dataframe)
         st.write(f'For a  beautifully finished house in the city of {loc}, with {bedroom} bedrooms,'
-                 f' {bathroom} bathroom and {parking_space} parking space the estimated cost is N{outcome[0]:.2f}')
+                 f' {bathroom} bathroom and {parking_space} parking space the estimated cost is N{round(outcome[0])}')
 
 
 if __name__ == '__main__':
